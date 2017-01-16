@@ -1,0 +1,26 @@
+[
+
+  {
+    "id": 0,
+    "name": "cycling",
+    "src": "../assets/images/cycling.jpeg"
+  },
+
+  {
+    "id": 1,
+    "name": "kitty",
+    "src": "../assets/images/kitten.jpeg"
+  },
+
+  {
+    "id": 3,
+    "name": "landscape",
+    "src": "../assets/images/landscape.jpeg"
+  },
+
+  {
+    "id": 4,
+    "name": "misty-river",
+    "src": "../assets/images/misty-river.jpeg"
+  }
+]

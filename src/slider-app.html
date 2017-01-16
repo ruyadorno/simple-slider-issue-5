@@ -1,0 +1,87 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="demo-slider.html">
+
+<dom-module id="slider-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      #simple-slider-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+      }
+      #simple-slider {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        width: 100%;
+        height: 612px;
+      }
+      .slide-button-container {
+        position: absolute;
+        top: 0px;
+        z-index: 12;
+        width: 30px;
+        height: 400px;
+        background-color: rgba(0,0,0,0.4);
+        /*box-sizing: border-box;*/
+      }
+      .slide-button-container:hover {
+        cursor: pointer;
+      }
+      .slide-button {
+        color: #FFF;
+      }
+      #prev-button {
+        left: 0px;
+      }
+      #next-button {
+        right: 0px;
+      }
+    </style>
+
+
+    <h2>[[ appTitle ]]</h2>
+  
+    <!-- 
+      retrieve the images async, so we can use a cms or other rest api
+      to fill our slider.
+    -->
+    <iron-ajax 
+      auto 
+      url="../assets/data/images.json" 
+      handle-as="json" 
+      last-response="{{ imagesData }}"></iron-ajax>
+
+    <!--
+      demo slider without async content
+    -->
+    <demo-slider example></demo-slider>
+
+    <!--
+      demo slider with async content
+      - we include the imagesData retrieved from an external source
+    -->
+    <demo-slider images-data="{{ imagesData }}"></demo-slider>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'slider-app',
+
+      properties: {
+        appTitle: {
+          type: String,
+          value: 'This is just a demo'
+        }
+      }
+
+    });
+  </script>
+</dom-module>

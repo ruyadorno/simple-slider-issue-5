@@ -1,0 +1,209 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/polymer-simple-slider/simple-slider.html">
+
+<dom-module id="demo-slider">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      #simple-slider-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+      }
+      #simple-slider {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        width: 100%;
+        height: 612px;
+      }
+      .slide-button-container {
+        position: absolute;
+        top: 0px;
+        z-index: 12;
+        width: 30px;
+        height: 400px;
+        background-color: rgba(0,0,0,0.4);
+        /*box-sizing: border-box;*/
+      }
+      .slide-button-container:hover {
+        cursor: pointer;
+      }
+      .slide-button {
+        color: #FFF;
+      }
+      .prev-button {
+        left: 0px;
+      }
+      .next-button {
+        right: 0px;
+      }
+
+      img {
+        width: 100%;
+        z-index: 1;
+      }
+      .slide-image-overlay {
+        position: absolute;
+        z-index: 11;
+      }
+      .slide-image-content {
+        background-color: white;
+        padding: var(--theme-component-space-inner);
+        margin: 1rem 3rem; /* location in the slide */
+      }
+      .title-text {
+
+      }
+    </style>
+    
+    <!--
+      We are dealing with an example here:
+      - <demo-slider example></demo-slider>
+    -->
+    <template 
+      is="dom-if"
+      if="{{ example }}">
+
+      <h2>--- example: {{ example }} - this one just works but not prev/next (might be the async loading of the script) ---</h2>
+
+      <div id="simple-slider-container">
+
+        <!-- previous button -->
+        <span href="#" class="slide-button-container prev-button"
+          on-click="prevSlide">
+          <iron-icon icon="hardware:keyboard-arrow-left" class="slide-button"></iron-icon>
+        </span>
+        <!--// previous button -->
+
+        <!-- simple-slider -->
+        <simple-slider id="simple-slider"
+          transition-property="opacity" 
+          start-value="0" 
+          visible-value="1" 
+          end-value="0">
+
+          <img src="http://placekitten.com/g/400/400"/>
+          <img src="https://unsplash.it/400/400/?random=0"/>
+          <img src="https://unsplash.it/400/400/?random=1"/>
+          <img src="https://unsplash.it/400/400/?random=2"/>
+        </simple-slider>
+        <!--// simple slider -->
+        
+        <!-- next button -->
+        <span href="#" class="slide-button-container next-button"
+          on-click="nextSlide">
+          <iron-icon icon="hardware:keyboard-arrow-right" class="slide-button"></iron-icon>
+        </span>
+        <!--// next button -->
+
+      </div>
+
+    </template>
+    
+    <!--
+      We are dealing with real data here
+      - <demo-slider slider-data="[items]"></demo-slider>
+    -->
+    <template 
+      is="dom-if"
+      if="{{ !example }}">
+
+      <h2>--- example: {{ example }} - this is what you came for ---</h2>
+
+      <div id="simple-slider-container">
+
+        <!-- previous button -->
+        <span onclick="javascript:document.getElementById('simple-slider').prev()" href="#" class="slide-button-container">
+          <iron-icon icon="hardware:keyboard-arrow-right" class="slide-button"></iron-icon>
+        </span>
+        <!--// previous button -->
+
+        <!-- simple-slider -->
+        <simple-slider id="simple-slider"
+          transition-property="opacity" 
+          start-value="0" 
+          visible-value="1" 
+          end-value="0">
+          
+          <template
+            is="dom-repeat"
+            items="{{ imagesData }}"
+            as="image">
+            
+            <article>
+             
+              <!-- header -->
+              <div class="slide-image-overlay">
+                <div class="slide-image-content">
+                  <header class$="title-text">{{ image.name }}</header>
+                </div>
+              </div>
+              <!--// header -->
+              
+              <!-- image -->
+              <img src="{{ image.src }}" alt="{{ image.name }}" />
+              <!--// image -->
+            </article>
+
+          </template>
+          
+        </simple-slider>
+        <!--// simple slider -->
+        
+        <!-- next button -->
+        <span onclick="javascript:document.getElementById('simple-slider').next()" href="#" class="slide-button-container">
+          <iron-icon icon="hardware:keyboard-arrow-right" class="slide-button"></iron-icon>
+        </span>
+        <!--// next button -->
+
+      </div>
+
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'demo-slider',
+
+      properties: {
+
+        example: {
+          type: Boolean,
+          value: false
+        },
+
+        imagesData: {
+          type: Array
+        }
+
+      },
+
+      ready: function() {
+        console.log(document.getElementById('simple-slider'));
+      },
+
+      prevSlide: function(e) {
+        console.log('prev ', e);
+        
+        document.getElementById('simple-slider').prev();
+      },
+
+      nextSlide: function(e) {
+        console.log('next ', e);
+
+        document.getElementById('simple-slider').next();
+      }
+
+    });
+  </script>
+</dom-module>

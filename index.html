@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>polymer-slider</title>
+    <meta name="description" content="polymer-slider description">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- might be a problem with async loading of the app -->
+    <link rel="import" href="src/slider-app.html" async>
+
+  </head>
+  <body>
+    <slider-app></slider-app>
+
+    <script>
+      window.performance && performance.mark && performance.mark('index.html');
+
+      Polymer = {lazyRegister: true, dom: 'shadow'};
+
+      (function() {
+        if ('registerElement' in document
+            && 'import' in document.createElement('link')
+            && 'content' in document.createElement('template')) {
+          // platform is good!
+        } else {
+          // polyfill the platform!
+          var e = document.createElement('script');
+          e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+          document.body.appendChild(e);
+        }
+      })();
+    </script>
+  </body>
+</html>
