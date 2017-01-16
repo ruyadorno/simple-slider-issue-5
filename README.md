@@ -1,6 +1,10 @@
-# \<polymer-slider\>
+# \<slider-app\>
 
+## Install the example
 
+```
+$ bower install
+```
 
 ## Install the Polymer-CLI
 
